@@ -3,10 +3,9 @@ import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-do
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, X, ChevronRight, Play, Music, MapPin, 
-  Sparkles, Cpu, Globe, Camera, Send, 
+  Sparkles, Cpu, Globe, Camera, Send,
   ArrowRight, Star, Quote, Zap
 } from 'lucide-react';
-import { generateWeddingTheme } from './services/gemini';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -34,7 +33,6 @@ const Navbar = () => {
     { name: 'Services', path: '/services' },
     { name: 'Case Study', path: '/case-study' },
     { name: 'Dubai', path: '/dubai' },
-    { name: 'AI Planner', path: '/ai-planner' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -488,77 +486,7 @@ const VRSimulator = () => {
   );
 };
 
-const AIPlanner = () => {
-  const [prompt, setPrompt] = useState("");
-  const [result, setResult] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
 
-  const handleGenerate = async () => {
-    if (!prompt) return;
-    setLoading(true);
-    const theme = await generateWeddingTheme(prompt);
-    setResult(theme);
-    setLoading(false);
-  };
-
-  return (
-    <div id="ai-planner" className="text-center mb-12">
-      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-cyan/10 border border-neon-cyan/20 text-neon-cyan text-xs font-bold uppercase tracking-widest mb-8">
-        <Zap size={14} /> Powered by Frozen Apple AI
-      </div>
-      <h2 className="text-4xl md:text-5xl font-serif mb-8">AI Theme Generator</h2>
-      <p className="text-white/50 mb-12">Describe your dream wedding, and our AI will architect a futuristic concept for you.</p>
-      
-      <div className="relative mb-12">
-        <textarea 
-          value={prompt}
-          onChange={(e) => setPrompt(e.target.value)}
-          placeholder="e.g., A neon-lit underwater palace wedding with holographic jellyfish and gold accents..."
-          className="w-full bg-white/5 border border-white/10 rounded-2xl p-6 text-white focus:border-gold outline-none min-h-[150px] transition-all"
-        />
-        <button 
-          onClick={handleGenerate}
-          disabled={loading}
-          className="absolute bottom-4 right-4 px-8 py-3 bg-gold text-black font-bold rounded-xl hover:bg-gold-light transition-all disabled:opacity-50"
-        >
-          {loading ? "Architecting..." : "Generate Concept"}
-        </button>
-      </div>
-
-      <AnimatePresence>
-        {result && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="glass-panel p-10 rounded-3xl text-left"
-          >
-            <h3 className="text-2xl font-serif text-gold mb-6">{result.ThemeName || "Your Custom Theme"}</h3>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <p className="text-xs uppercase tracking-widest text-white/40 mb-2">Decor Concept</p>
-                <p className="text-sm leading-relaxed mb-6">{result.DecorConcept}</p>
-                
-                <p className="text-xs uppercase tracking-widest text-white/40 mb-2">Tech Integration</p>
-                <p className="text-sm leading-relaxed">{result.TechIntegration}</p>
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-widest text-white/40 mb-2">Atmosphere</p>
-                <p className="text-sm leading-relaxed mb-6">{result.AtmosphereDescription}</p>
-                
-                <p className="text-xs uppercase tracking-widest text-white/40 mb-2">Color Palette</p>
-                <div className="flex gap-2">
-                  {result.ColorPalette?.map((color: string, i: number) => (
-                    <div key={i} className="w-10 h-10 rounded-full border border-white/10" style={{ backgroundColor: color }} title={color}></div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
 
 const Contact = () => {
   return (
@@ -686,13 +614,6 @@ export default function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/case-study" element={<CaseStudy />} />
             <Route path="/dubai" element={<DubaiPortfolio />} />
-            <Route path="/ai-planner" element={
-              <section className="py-24 px-6 bg-[#0a0a0a] min-h-screen">
-                <div className="max-w-4xl mx-auto">
-                  <AIPlanner />
-                </div>
-              </section>
-            } />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </div>
