@@ -199,7 +199,7 @@ const About = () => {
 };
 
 const Services = () => {
-  const services = [
+  const premiumServices = [
     {
       icon: <Sparkles className="text-gold" size={32} />,
       title: "Luxury Planning",
@@ -222,6 +222,84 @@ const Services = () => {
     }
   ];
 
+  const comprehensiveServices = [
+    "Venue selection and booking",
+    "Guest management and invitations",
+    "Catering and beverage services",
+    "Decor and design",
+    "Photography and videography",
+    "Wedding attire and accessories",
+    "Entertainment and music",
+    "Wedding cake design and catering",
+    "Floral arrangements",
+    "Transportation and accommodation",
+    "Wedding favors and gifts",
+    "Wedding planner and coordinator",
+    "Budget management",
+    "Timeline creation",
+    "Vendor management",
+    "Wedding website creation",
+    "RSVP tracking",
+    "Seating arrangement",
+    "Menu planning",
+    "Bar services",
+    "Lighting and sound",
+    "Fireworks and special effects",
+    "Wedding favors for guests",
+    "Honeymoon planning",
+    "Wedding day coordination",
+    "Pre-wellness programs",
+    "Bridal shower planning",
+    "Bachelorette party planning",
+    "Rehearsal dinner planning",
+    "Post-wedding brunch",
+    "Wedding anniversary planning",
+    "Custom wedding invitations",
+    "Wedding stationery design",
+    "Wedding hashtag creation",
+    "Social media management",
+    "Wedding photography editing",
+    "Videography editing",
+    "Wedding album design",
+    "Wedding video creation",
+    "Wedding decor rentals",
+    "Furniture and equipment rentals",
+    "Tent and canopy rentals",
+    "Wedding linens and drapes",
+    "Chair and table rentals",
+    "Glassware and china rentals",
+    "Cutlery and flatware rentals",
+    "Bar equipment rentals",
+    "Sound and lighting equipment rentals",
+    "Stage and dance floor rentals",
+    "Wedding officiant services",
+    "Wedding ceremony music",
+    "Wedding processional music",
+    "Wedding recessional music",
+    "Wedding transportation services",
+    "Luxury car rentals",
+    "Helicopter tours",
+    "Hot air balloon rides",
+    "Sunset cruises",
+    "Private yacht rentals",
+    "Wedding planners and coordinators",
+    "Day-of coordination",
+    "Wedding consulting",
+    "Budgeting and financial planning",
+    "Vendor referrals",
+    "Timeline creation",
+    "Day-of logistics",
+    "Setup and teardown",
+    "Wedding rehearsal coordination",
+    "Wedding day emergency kit",
+    "Wedding day timeline",
+    "Wedding ceremony script",
+    "Wedding vow writing",
+    "Wedding toast writing",
+    "Wedding speech writing",
+    "Wedding day photography"
+  ];
+
   return (
     <section id="services" className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto">
@@ -231,8 +309,8 @@ const Services = () => {
           <div className="w-24 h-1 bg-gold mx-auto"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {services.map((service, idx) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+          {premiumServices.map((service, idx) => (
             <motion.div 
               key={idx}
               whileHover={{ y: -10 }}
@@ -243,6 +321,27 @@ const Services = () => {
               <p className="text-white/50 text-sm leading-relaxed">{service.desc}</p>
             </motion.div>
           ))}
+        </div>
+
+        <div>
+          <div className="text-center mb-16">
+            <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Comprehensive Offerings</span>
+            <h3 className="text-3xl md:text-5xl font-serif mb-6">Every Detail, Perfected</h3>
+            <p className="text-white/50 max-w-2xl mx-auto leading-relaxed">
+              From the grandest visions to the smallest nuances, our complete A-Z catalog ensures no detail of your celebration is ever overlooked.
+            </p>
+          </div>
+          
+          <div className="glass-panel p-8 md:p-12 rounded-3xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4">
+              {comprehensiveServices.map((service, idx) => (
+                <div key={idx} className="flex items-start gap-3 border-b border-white/5 pb-3 hover:border-gold/30 transition-colors group">
+                  <span className="text-gold font-serif text-sm opacity-50 group-hover:opacity-100 transition-opacity mt-0.5">{(idx + 1).toString().padStart(2, '0')}.</span>
+                  <span className="text-white/70 text-sm group-hover:text-white transition-colors leading-snug">{service}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -265,7 +364,7 @@ const NewsFeature = () => {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">ADITI AND ROHAN'S 2035 UNION</span>
           </h2>
           <p className="text-white/60 max-w-3xl leading-relaxed md:text-lg">
-            Mumbai, India - In a groundbreaking celebration of love and technology, Aditi and Rohan's wedding, planned by <strong className="text-gold font-medium">@FrozenAppleWeddings</strong>, is set to redefine the future of matrimony. This futuristic union, taking place in 2035, promises to be an unforgettable experience.
+            Mumbai, India - In a groundbreaking celebration of love and technology, Aditi and Rohan's wedding, planned by <strong className="text-gold font-medium">@FrozenAppleAiWeddings</strong>, is set to redefine the future of matrimony. This futuristic union, taking place in 2035, promises to be an unforgettable experience.
           </p>
         </div>
 
@@ -553,23 +652,39 @@ const Contact = () => {
             Ready to design a wedding that transcends time? Our team of visionary architects is ready to bring your dream to life.
           </p>
           
-          <div className="space-y-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gold">
-                <MapPin size={20} />
+          <div className="space-y-8">
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-gold shrink-0 border border-gold/20">
+                <span className="font-bold text-xl">@</span>
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest opacity-40">Global HQ</p>
-                <p>Dubai & Mumbai</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Global Business Handle</p>
+                <p className="font-serif text-xl text-gold mb-1">@FrozenAppleAiWeddings</p>
+                <div className="flex gap-2 text-[10px] md:text-xs text-white/60 font-medium">
+                  <span className="px-2 py-1 bg-white/5 rounded-md border border-white/5">Destination Weddings</span>
+                  <span className="px-2 py-1 bg-white/5 rounded-md border border-white/5">Decor</span>
+                  <span className="px-2 py-1 bg-white/5 rounded-md border border-white/5">Entertainment</span>
+                </div>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-gold">
+
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-neon-cyan shrink-0 border border-neon-cyan/20">
+                <span className="font-bold text-xl">@</span>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Local Support</p>
+                <p className="text-lg text-neon-cyan font-medium">@SahilThakur</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-gold shrink-0 border border-gold/20">
                 <Send size={20} />
               </div>
               <div>
-                <p className="text-xs uppercase tracking-widest opacity-40">Email</p>
-                <p>hello@frozenappleaiweddings.com</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Email</p>
+                <p className="text-white/80">hello@frozenappleaiweddings.com</p>
               </div>
             </div>
           </div>
