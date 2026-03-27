@@ -734,7 +734,7 @@ const Footer = () => {
   return (
     <footer className="py-12 px-6 border-t border-white/10 bg-luxury-black">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full md:w-1/3 justify-center md:justify-start">
           <div className="w-8 h-8 gold-gradient rounded-full flex items-center justify-center">
             <span className="text-black font-bold text-sm">F</span>
           </div>
@@ -743,14 +743,19 @@ const Footer = () => {
           </span>
         </div>
         
-        <div className="text-white/40 text-xs uppercase tracking-widest">
+        <div className="text-white/40 text-xs uppercase tracking-widest text-center w-full md:w-1/3">
           © 2026 Frozen Apple Weddings Pvt. Ltd. | Designing the Future
         </div>
         
-        <div className="flex gap-6">
-          <Camera size={20} className="text-white/40 hover:text-gold cursor-pointer transition-colors" />
-          <Globe size={20} className="text-white/40 hover:text-gold cursor-pointer transition-colors" />
-          <Zap size={20} className="text-white/40 hover:text-gold cursor-pointer transition-colors" />
+        <div className="w-full md:w-1/3 flex justify-center md:justify-end">
+          <a 
+            href="https://www.webtotalsolution.com/" 
+            target="_blank" 
+            rel="noreferrer" 
+            className="text-xs uppercase tracking-widest text-white/40 hover:text-gold transition-colors font-bold"
+          >
+            Made by Web Total Solution
+          </a>
         </div>
       </div>
     </footer>
