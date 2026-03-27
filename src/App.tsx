@@ -103,8 +103,8 @@ const Hero = () => {
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=2070" 
-          className="w-full h-full object-cover opacity-40 scale-110"
+          src="/pics/image.png" 
+          className="w-full h-full object-cover opacity-60 scale-110"
           alt="Luxury Wedding"
           referrerPolicy="no-referrer"
         />
@@ -152,7 +152,7 @@ const About = () => {
         <div className="relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
             <img 
-              src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&q=80&w=2069" 
+              src="/pics/image copy.png" 
               className="w-full h-full object-cover"
               alt="CEO Aditi Sharma"
               referrerPolicy="no-referrer"
@@ -249,19 +249,73 @@ const Services = () => {
   );
 };
 
+const NewsFeature = () => {
+  return (
+    <section className="py-24 px-6 bg-[#050505] border-t border-b border-white/10 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none flex justify-end">
+        <Star size={400} className="text-gold -mt-24 -mr-24" />
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="px-4 py-1 border border-gold text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-6 rounded-full inline-block">
+            Times Of India Exclusive
+          </div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight">
+            FUTURISTIC WEDDING EXTRAVAGANZA: <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">ADITI AND ROHAN'S 2035 UNION</span>
+          </h2>
+          <p className="text-white/60 max-w-3xl leading-relaxed md:text-lg">
+            Mumbai, India - In a groundbreaking celebration of love and technology, Aditi and Rohan's wedding, planned by <strong className="text-gold font-medium">@FrozenAppleWeddings</strong>, is set to redefine the future of matrimony. This futuristic union, taking place in 2035, promises to be an unforgettable experience.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8">
+          <div className="glass-panel p-8 rounded-2xl border-t border-gold/30 hover:border-gold/60 transition-colors">
+            <h3 className="text-xl font-serif text-gold mb-6 flex items-center gap-3"><Zap size={20} /> Innovative Features</h3>
+            <ul className="space-y-4 text-sm text-white/70">
+              <li><strong className="text-white">Virtual Reality Experience:</strong> Guests will be transported to new dimensions with immersive VR experiences.</li>
+              <li><strong className="text-white">AI-Powered Decor:</strong> The venue will be transformed with AI-designed themes and patterns.</li>
+              <li><strong className="text-white">Drone Light Show:</strong> A mesmerizing drone display will illuminate the ceremony and reception.</li>
+              <li><strong className="text-white">Personalized Wedding Cake:</strong> A 3D-printed masterpiece tailored to the couple's preferences.</li>
+            </ul>
+          </div>
+          
+          <div className="glass-panel p-8 rounded-2xl border-t border-gold/30 hover:border-gold/60 transition-colors">
+            <h3 className="text-xl font-serif text-gold mb-6 flex items-center gap-3"><Star size={20} /> A Luxurious Affair</h3>
+            <ul className="space-y-4 text-sm text-white/70">
+              <li><strong className="text-white">Futuristic Venue:</strong> The ceremony will take place in a state-of-the-art venue with breathtaking views.</li>
+              <li><strong className="text-white">Tech-Infused Attire:</strong> Aditi's stunning wedding dress and Rohan's sleek suit will showcase the latest in fashion technology.</li>
+              <li><strong className="text-white">Modern Twists:</strong> Traditional rituals will be reimagined with virtual reality experiences and holographic projections.</li>
+            </ul>
+          </div>
+
+          <div className="glass-panel p-8 rounded-2xl border-t border-gold/30 hover:border-gold/60 transition-colors">
+            <h3 className="text-xl font-serif text-gold mb-6 flex items-center gap-3"><Cpu size={20} /> Reception Highlights</h3>
+            <ul className="space-y-4 text-sm text-white/70">
+              <li><strong className="text-white">Culinary Innovation:</strong> Advanced culinary technology will prepare a range of cuisines, including vegan and gluten-free options.</li>
+              <li><strong className="text-white">Entertainment:</strong> Live music, drone performances, and holographic tributes will make the reception unforgettable.</li>
+              <li><strong className="text-white">3D-Printed Favors:</strong> Guests will receive customized, 3D-printed gifts as tokens of appreciation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const CaseStudy = () => {
   const ceremonyImages = [
-    "https://assets.cntraveller.in/photos/68cd597150f73df6a2d4f664/16%3A9/w_3152%2Ch_1773%2Cc_limit/DWG%20Hotel%20Round%20up-Samode%20Palace%20copy.jpg",
-    "https://weddingsutra.com/images/wedding-images/blog-images/tamanna-nikunj/tamanna-nikunj-img1.jpg",
-    "https://i.pinimg.com/736x/93/d9/fc/93d9fcccef7254ed59035265d60cfb52.jpg",
-    "https://i.pinimg.com/736x/a4/b7/69/a4b76995a686e67ae12eb0b926155554.jpg"
+    "/pics/image copy 2.png",
+    "/pics/image copy 3.png",
+    "/pics/image copy 4.png",
+    "/pics/image copy 5.png"
   ];
 
   const receptionImages = [
-    "https://cdn.prod.website-files.com/62960780ff243955c14efef7/675ac58a34049ca038d3279e_wedding-drone-show.webp",
-    "https://i.pinimg.com/736x/53/2b/dc/532bdcc1974d772f762f328f080154b9.jpg",
-    "https://www.hindustantimes.com/ht-img/img/2026/02/16/cropped/4-3/file_00000000063c7206bdd7d80cdd76b9fc_1771234874841_1771234890719.png",
-    "https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/content9890.jpg"
+    "/pics/image copy 6.png",
+    "/pics/image copy 7.png",
+    "/pics/image copy 8.png",
+    "/pics/image copy 9.png"
   ];
 
   return (
@@ -322,10 +376,10 @@ const MehendiModule = () => {
   ];
 
   const decorImages = [
-    "https://cheetah.cherishx.com/uploads/1680173111_large.jpg",
-    "https://i.pinimg.com/736x/39/b2/d0/39b2d091782506a5aa9aac1cacbae266.jpg",
-    "https://m.media-amazon.com/images/I/81B6i9FPIWL.jpg",
-    "https://m.media-amazon.com/images/S/aplus-media-library-service-media/f2e3e3a0-7488-4f5d-9fac-898fb715d3f4.__CR0%2C0%2C300%2C300_PT0_SX300_V1___.jpg"
+    "/pics/image copy 10.png",
+    "/pics/image copy 11.png",
+    "/pics/image copy 12.png",
+    "/pics/image copy 2.png"
   ];
 
   return (
@@ -465,7 +519,7 @@ const VRSimulator = () => {
   return (
     <div className="relative group cursor-crosshair rounded-3xl overflow-hidden border border-white/10 aspect-video mb-12">
       <img 
-        src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&q=80&w=2070" 
+        src="/pics/image copy 4.png" 
         className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000"
         alt="VR Simulation"
         referrerPolicy="no-referrer"
@@ -591,6 +645,7 @@ const Footer = () => {
 const Home = () => (
   <>
     <Hero />
+    <NewsFeature />
     <MehendiModule />
     <section className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-4xl mx-auto">
