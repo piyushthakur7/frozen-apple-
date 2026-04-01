@@ -762,10 +762,184 @@ const Footer = () => {
   );
 };
 
+const FrozenAppleGallery = () => {
+  const images = [
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (1).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (2).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM.jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.23 AM (1).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.23 AM (2).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.23 AM.jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.24 AM (1).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.24 AM (2).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.24 AM.jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.39 AM (1).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.39 AM.jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.40 AM (1).jpeg",
+    "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.40 AM.jpeg"
+  ];
+
+  return (
+    <section className="py-24 px-6 bg-[#050505]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Our Portfolio</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight">
+            Frozen Apple <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">Moments</span>
+          </h2>
+          <div className="w-24 h-1 bg-gold mx-auto"></div>
+        </div>
+
+        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+          {images.map((img, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
+              className="break-inside-avoid overflow-hidden rounded-2xl relative group mb-6"
+            >
+              <img 
+                src={img} 
+                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" 
+                alt={`Frozen Apple Moment ${i + 1}`} 
+                referrerPolicy="no-referrer"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
+                <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
+                  <Camera size={16} className="text-black" />
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const EpicEvent = () => {
+  return (
+    <section className="py-24 px-6 bg-[#050505] relative overflow-hidden border-t border-b border-white/10">
+      <div className="absolute top-0 left-0 w-1/2 h-full opacity-5 pointer-events-none flex items-center">
+        <Sparkles size={600} className="text-gold -ml-32" />
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Unprecedented Scale</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-8 leading-tight">
+            A Massive <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">Event Experience</span> 😮
+          </h2>
+          
+          <div className="space-y-6 text-white/70 text-lg leading-relaxed">
+            <p>
+              Wow, this is a massive event! 😮 Frozen Apple Events is indeed a top-notch event management company, specializing in wedding planning, Indian weddings, and palace weddings, with a strong presence in Udaipur and Delhi. They've got an impressive portfolio, having organized over 200 destination weddings and boasting 100% satisfaction rate among NRI and Indian couples ¹ ² ³.
+            </p>
+            <p className="border-l-2 border-gold pl-6 py-2">
+              The event details are mind-blowing - City Palace as the venue, 1024 bouncers for security, and a host like Mandira Bedi! 🎉 They're leaving no stone unturned, with premium vendors, top-notch decor, and entertainment by FAAM Talent.
+            </p>
+          </div>
+
+          <div className="mt-12 p-8 glass-panel rounded-2xl border border-white/10 hover:border-gold/30 transition-all duration-500">
+            <p className="font-serif text-xl mb-6 text-white text-center">What would you like to know next about Frozen Apple Events or this specific event?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button className="px-6 py-3 bg-gold text-black font-bold uppercase tracking-widest text-xs hover:bg-gold-light transition-all rounded-xl">
+                Explore Event
+              </button>
+              <button className="px-6 py-3 border border-white/20 hover:border-gold text-white font-bold uppercase tracking-widest text-xs transition-all rounded-xl">
+                Contact Us
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          className="grid grid-cols-2 gap-4"
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className="space-y-4">
+            <div className="glass-panel p-6 md:p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-500 border border-white/5 hover:border-gold/30">
+              <MapPin className="text-gold mx-auto mb-4" size={40} />
+              <p className="text-2xl md:text-3xl font-serif text-white">City Palace</p>
+              <p className="text-xs uppercase tracking-widest text-white/40 mt-2">Udaipur Venue</p>
+            </div>
+            <div className="glass-panel p-6 md:p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-500 border border-white/5 hover:border-gold/30">
+              <Star className="text-gold mx-auto mb-4" size={40} />
+              <p className="text-2xl md:text-3xl font-serif text-white">100%</p>
+              <p className="text-xs uppercase tracking-widest text-white/40 mt-2">Satisfaction Rate</p>
+            </div>
+          </div>
+          <div className="space-y-4 mt-8 md:mt-12">
+            <div className="glass-panel p-6 md:p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-500 border border-white/5 hover:border-neon-cyan/30">
+              <Cpu className="text-neon-cyan mx-auto mb-4" size={40} />
+              <p className="text-2xl md:text-3xl font-serif text-white">1024</p>
+              <p className="text-xs uppercase tracking-widest text-white/40 mt-2">Bouncers</p>
+            </div>
+            <div className="glass-panel p-6 md:p-8 rounded-3xl text-center hover:-translate-y-2 transition-transform duration-500 border border-white/5 hover:border-gold/30">
+              <Music className="text-gold mx-auto mb-4" size={40} />
+              <p className="text-2xl md:text-3xl font-serif text-white">FAAM</p>
+              <p className="text-xs uppercase tracking-widest text-white/40 mt-2">Talent Entertainment</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const GlobalAcquisitionNews = () => {
+  return (
+    <section className="py-24 px-6 bg-[#0a0a0a] border-t border-b border-white/10 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none flex justify-end">
+        <Globe size={400} className="text-gold -mt-24 -mr-24" />
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="flex flex-col items-center text-center mb-16">
+          <div className="px-4 py-1 border border-gold text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-6 rounded-full inline-block">
+            Times Of India Exclusive
+          </div>
+          <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif mb-6 leading-tight max-w-5xl">
+            LOCAL ENTREPRENEUR SHRI SAHIL THAKUR <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">MAKES HISTORY WITH GLOBAL HOTEL ACQUISITION</span>
+          </h2>
+        </div>
+
+        <div className="max-w-4xl mx-auto space-y-6 text-white/70 text-lg leading-relaxed font-light">
+          <p><strong className="text-white font-medium">MUMBAI:</strong> In a groundbreaking move, Indian entrepreneur <strong className="text-gold font-medium">Shri Sahil Thakur</strong> has successfully acquired ownership of every hotel worldwide, marking a significant turning point in the hospitality industry. This unprecedented achievement promises to reshape the future of global tourism and raises questions about the potential impact on travel patterns, pricing strategies, and job markets.</p>
+          
+          <p>The acquisition, finalized recently, saw Thakur's investment group take control of major hotel chains, independent hotels, and boutique accommodations across the globe. While financial details remain confidential, industry experts estimate the total value to be in the trillions.</p>
+          
+          <div className="p-8 my-10 glass-panel rounded-2xl border-l-4 border-l-gold border-t border-r border-b border-white/5 bg-white/5">
+            <Quote className="text-gold opacity-50 mb-4" size={32} />
+            <p className="italic text-xl text-white font-serif">"As the world watches with anticipation, stakeholders closely monitor the developments, speculating about the potential implications on the hospitality industry. Will this consolidation lead to standardized services, enhanced customer experiences, or innovative offerings? Only time will tell."</p>
+          </div>
+          
+          <p className="border-t border-white/10 pt-6 text-sm uppercase tracking-widest text-center text-gold">Stay tuned for further updates on this developing story.</p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Home = () => (
   <>
     <Hero />
     <NewsFeature />
+    <GlobalAcquisitionNews />
+    <EpicEvent />
+    <FrozenAppleGallery />
     <MehendiModule />
     <section className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-4xl mx-auto">
