@@ -4,8 +4,11 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Menu, X, ChevronRight, Play, Music, MapPin, 
   Sparkles, Cpu, Globe, Camera, Send,
-  ArrowRight, Star, Quote, Zap
+  ArrowRight, Star, Quote, Zap,
+  Loader2
 } from 'lucide-react';
+import { supabase, MediaItem } from './lib/supabase';
+import AdminPanel from './components/Admin';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -763,7 +766,10 @@ const Footer = () => {
 };
 
 const FrozenAppleGallery = () => {
-  const images = [
+  const [cloudMedia, setCloudMedia] = useState<MediaItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const localImages = [
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (1).jpeg",
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (2).jpeg",
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM.jpeg",
@@ -779,6 +785,26 @@ const FrozenAppleGallery = () => {
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.40 AM.jpeg"
   ];
 
+  useEffect(() => {
+    const fetchCloudMedia = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('media')
+          .select('*')
+          .order('created_at', { ascending: false });
+        
+        if (error) throw error;
+        if (data) setCloudMedia(data);
+      } catch (err) {
+        console.error('Error fetching gallery:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCloudMedia();
+  }, []);
+
   return (
     <section className="py-24 px-6 bg-[#050505]">
       <div className="max-w-7xl mx-auto">
@@ -790,31 +816,76 @@ const FrozenAppleGallery = () => {
           <div className="w-24 h-1 bg-gold mx-auto"></div>
         </div>
 
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
-          {images.map((img, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
-              className="break-inside-avoid overflow-hidden rounded-2xl relative group mb-6"
-            >
-              <img 
-                src={img} 
-                className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" 
-                alt={`Frozen Apple Moment ${i + 1}`} 
-                referrerPolicy="no-referrer"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
-                  <Camera size={16} className="text-black" />
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="text-gold animate-spin mb-4" size={40} />
+            <p className="text-white/40 font-serif italic">Loading masterpieces...</p>
+          </div>
+        ) : (
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-6">
+            {/* Show local images first, then cloud media */}
+            {localImages.map((img, i) => (
+              <motion.div 
+                key={`local-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
+                className="break-inside-avoid overflow-hidden rounded-2xl relative group mb-6"
+              >
+                <img 
+                  src={img} 
+                  className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" 
+                  alt={`Frozen Apple Moment ${i + 1}`} 
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
+                  <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
+                    <Camera size={16} className="text-black" />
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+
+            {/* Cloud Media */}
+            {cloudMedia.map((item, i) => (
+              <motion.div 
+                key={item.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (i % 3) * 0.1 }}
+                className="break-inside-avoid overflow-hidden rounded-2xl relative group mb-6 border border-white/5"
+              >
+                {item.type === 'video' ? (
+                  <video 
+                    src={item.url} 
+                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                    controls={false}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                ) : (
+                  <img 
+                    src={item.url} 
+                    className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-700" 
+                    alt={`Cloud Moment ${i + 1}`} 
+                    referrerPolicy="no-referrer"
+                    loading="lazy"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
+                  <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
+                    {item.type === 'video' ? <Play size={16} className="text-black" /> : <Camera size={16} className="text-black" />}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
@@ -964,6 +1035,7 @@ export default function App() {
             <Route path="/case-study" element={<CaseStudy />} />
             <Route path="/dubai" element={<DubaiPortfolio />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
         </div>
         <Footer />
