@@ -786,6 +786,20 @@ const FrozenAppleGallery = () => {
   const [loading, setLoading] = useState(true);
 
   const localImages = [
+    "/hi/image copy 10.png",
+    "/hi/image copy 11.png",
+    "/hi/image copy 12.png",
+    "/hi/image copy 13.png",
+    "/hi/image copy 2.png",
+    "/hi/image copy 3.png",
+    "/hi/image copy 4.png",
+    "/hi/image copy 5.png",
+    "/hi/image copy 6.png",
+    "/hi/image copy 7.png",
+    "/hi/image copy 8.png",
+    "/hi/image copy 9.png",
+    "/hi/image copy.png",
+    "/hi/image.png",
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (1).jpeg",
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM (2).jpeg",
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.27.22 AM.jpeg",
