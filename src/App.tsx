@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { supabase, MediaItem } from './lib/supabase';
 import AdminPanel from './components/Admin';
+import { initializeRazorpayPayment } from './services/razorpayService';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -20,7 +21,7 @@ const ScrollToTop = () => {
 
 // --- Components ---
 
-const Navbar = () => {
+const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -61,7 +62,10 @@ const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <button className="px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 text-xs uppercase tracking-widest font-bold">
+          <button 
+            onClick={onBookNow}
+            className="px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 text-xs uppercase tracking-widest font-bold"
+          >
             Book Now
           </button>
         </div>
@@ -93,6 +97,15 @@ const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              <button 
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onBookNow();
+                }}
+                className="w-full py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm mt-4"
+              >
+                Book Now
+              </button>
             </div>
           </motion.div>
         )}
@@ -101,7 +114,7 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => {
+const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 z-0">
@@ -131,8 +144,11 @@ const Hero = () => {
             Where timeless tradition meets futuristic innovation. We craft cinematic experiences that redefine the essence of celebration.
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
-            <button className="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all duration-300 flex items-center gap-2 group">
-              Explore Services <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            <button 
+              onClick={onBookNow}
+              className="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all duration-300 flex items-center gap-2 group"
+            >
+              Book Consultation <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </button>
             <button className="px-10 py-4 border border-white/20 hover:border-gold transition-all duration-300 flex items-center gap-2 uppercase tracking-widest text-sm font-bold">
               <Play size={18} fill="currentColor" /> Watch Film
@@ -1004,9 +1020,110 @@ const GlobalAcquisitionNews = () => {
   );
 };
 
-const Home = () => (
+const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    amount: '1000'
+  });
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+    
+    try {
+      await initializeRazorpayPayment(
+        Number(formData.amount),
+        { name: formData.name, email: formData.email },
+        (res) => {
+          alert(`Payment Successful! Order ID: ${res.razorpay_order_id}`);
+          onClose();
+        },
+        (err) => {
+          alert(`Payment Failed: ${err.description || 'Unknown error'}`);
+        }
+      );
+    } catch (error) {
+      console.error(error);
+      alert('Failed to initiate payment. Check server settings.');
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        className="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-xl border border-gold/30"
+      >
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl font-serif">Book Your <span className="text-gold">Legacy</span></h2>
+          <button onClick={onClose} className="p-2 hover:bg-white/5 rounded-full"><X size={24} /></button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-widest opacity-50 block">Name</label>
+            <input 
+              required
+              type="text" 
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-gold outline-none"
+              placeholder="Your full name"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-widest opacity-50 block">Email</label>
+            <input 
+              required
+              type="email" 
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-gold outline-none"
+              placeholder="email@example.com"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-widest opacity-50 block">Consultation Fee (INR)</label>
+            <div className="relative">
+              <input 
+                required
+                type="number" 
+                value={formData.amount}
+                onChange={(e) => setFormData({...formData, amount: e.target.value})}
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-gold outline-none pl-12 text-gold font-bold text-xl"
+              />
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gold font-bold">₹</span>
+            </div>
+          </div>
+
+          <button 
+            type="submit"
+            disabled={isProcessing}
+            className="w-full py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all rounded-xl mt-4 flex items-center justify-center gap-2"
+          >
+            {isProcessing ? <Loader2 className="animate-spin" /> : null}
+            {isProcessing ? 'Initializing Checkout...' : 'Secure Checkout via Razorpay'}
+          </button>
+          
+          <p className="text-[10px] text-center text-white/30 uppercase tracking-[0.2em]">
+            Secured by Razorpay. 256-bit SSL encryption.
+          </p>
+        </form>
+      </motion.div>
+    </div>
+  );
+};
+
+const Home = ({ onBookNow }: { onBookNow: () => void }) => (
   <>
-    <Hero />
+    <Hero onBookNow={onBookNow} />
     <NewsFeature />
     <GlobalAcquisitionNews />
     <EpicEvent />
@@ -1022,14 +1139,16 @@ const Home = () => (
 );
 
 export default function App() {
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
   return (
     <BrowserRouter>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <Navbar onBookNow={() => setIsBookingModalOpen(true)} />
         <div className="flex-grow pt-24 md:pt-0">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home onBookNow={() => setIsBookingModalOpen(true)} />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/case-study" element={<CaseStudy />} />
@@ -1039,6 +1158,11 @@ export default function App() {
           </Routes>
         </div>
         <Footer />
+
+        <BookingModal 
+          isOpen={isBookingModalOpen} 
+          onClose={() => setIsBookingModalOpen(false)} 
+        />
       </div>
     </BrowserRouter>
   );
