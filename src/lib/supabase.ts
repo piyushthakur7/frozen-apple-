@@ -7,10 +7,17 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.warn('Supabase credentials missing. Media management will be disabled.');
 }
 
-export const supabase = createClient(
-  supabaseUrl || '',
-  supabaseAnonKey || ''
-);
+let supabase: any;
+try {
+  supabase = createClient(
+    supabaseUrl || 'https://placeholder.supabase.co',
+    supabaseAnonKey || 'placeholder'
+  );
+} catch (error) {
+  console.error('Supabase initialization failed:', error);
+  supabase = { from: () => ({ select: () => ({ order: () => Promise.resolve({ data: [] }) }) }) }; 
+}
+export { supabase };
 
 export type MediaItem = {
   id: string;

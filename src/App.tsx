@@ -1129,7 +1129,7 @@ const Home = ({ onBookNow, cloudMedia }: { onBookNow: () => void; cloudMedia: Me
   <>
     <Hero onBookNow={onBookNow} />
     <NewsFeature />
-    <GlobalAcquisitionNews />
+    <DubaiPortfolio />
     <EpicEvent />
     <FrozenAppleGallery cloudMedia={cloudMedia} />
     <MehendiModule cloudMedia={cloudMedia} />
