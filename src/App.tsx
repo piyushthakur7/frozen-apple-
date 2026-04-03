@@ -485,7 +485,7 @@ const CaseStudy = () => {
   );
 };
 
-const MehendiModule = () => {
+const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
   const playlist = [
     { title: "Mehendi Laga Ke Rakhna", cat: "Traditional" },
     { title: "Bhangra Mix 2035", cat: "Punjabi" },
@@ -493,12 +493,19 @@ const MehendiModule = () => {
     { title: "Gidda Beats", cat: "Punjabi" }
   ];
 
-  const decorImages = [
-    "/pics/image copy 10.png",
-    "/pics/image copy 11.png",
-    "/pics/image copy 12.png",
-    "/pics/image copy 2.png"
-  ];
+  const mehndiCloudImages = cloudMedia
+    .filter(item => item.category === 'Mehndi' && item.type === 'image')
+    .map(item => item.url);
+
+  const decorImages = mehndiCloudImages.length >= 4 
+    ? mehndiCloudImages.slice(0, 4)
+    : [
+        "/pics/image copy 10.png",
+        "/pics/image copy 11.png",
+        "/pics/image copy 12.png",
+        "/pics/image copy 2.png",
+        ...mehndiCloudImages
+      ].slice(0, 4);
 
   return (
     <section className="py-24 px-6 bg-[#0a0a0a]">
@@ -532,8 +539,9 @@ const MehendiModule = () => {
           <h3 className="text-3xl font-serif mb-8">Mehendi Décor Visualization</h3>
           <div className="grid grid-cols-2 gap-4">
             {decorImages.map((img, i) => (
-              <div key={i} className="aspect-square rounded-2xl overflow-hidden border border-white/10">
-                <img src={img} className="w-full h-full object-cover" alt="Mehendi Decor" referrerPolicy="no-referrer" />
+              <div key={i} className="aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
+                <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Mehendi Decor" referrerPolicy="no-referrer" />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
               </div>
             ))}
           </div>
@@ -781,10 +789,7 @@ const Footer = () => {
   );
 };
 
-const FrozenAppleGallery = () => {
-  const [cloudMedia, setCloudMedia] = useState<MediaItem[]>([]);
-  const [loading, setLoading] = useState(true);
-
+const FrozenAppleGallery = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
   const localImages = [
     "/hi/image copy 10.png",
     "/hi/image copy 11.png",
@@ -815,26 +820,6 @@ const FrozenAppleGallery = () => {
     "/pics/frozen apple/WhatsApp Image 2026-03-28 at 6.29.40 AM.jpeg"
   ];
 
-  useEffect(() => {
-    const fetchCloudMedia = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('media')
-          .select('*')
-          .order('created_at', { ascending: false });
-        
-        if (error) throw error;
-        if (data) setCloudMedia(data);
-      } catch (err) {
-        console.error('Error fetching gallery:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCloudMedia();
-  }, []);
-
   return (
     <section className="py-24 px-6 bg-[#050505]">
       <div className="max-w-7xl mx-auto">
@@ -846,7 +831,7 @@ const FrozenAppleGallery = () => {
           <div className="w-24 h-1 bg-gold mx-auto"></div>
         </div>
 
-        {loading ? (
+        {cloudMedia.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="text-gold animate-spin mb-4" size={40} />
             <p className="text-white/40 font-serif italic">Loading masterpieces...</p>
@@ -907,9 +892,14 @@ const FrozenAppleGallery = () => {
                     loading="lazy"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6 pointer-events-none">
-                  <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
-                    {item.type === 'video' ? <Play size={16} className="text-black" /> : <Camera size={16} className="text-black" />}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 pointer-events-none">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="px-2 py-1 bg-gold text-black text-[8px] font-bold uppercase tracking-widest rounded">
+                      {item.category || 'Portfolio'}
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20">
+                      {item.type === 'video' ? <Play size={12} className="text-white" /> : <Camera size={12} className="text-white" />}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -1135,14 +1125,14 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 };
 
-const Home = ({ onBookNow }: { onBookNow: () => void }) => (
+const Home = ({ onBookNow, cloudMedia }: { onBookNow: () => void; cloudMedia: MediaItem[] }) => (
   <>
     <Hero onBookNow={onBookNow} />
     <NewsFeature />
     <GlobalAcquisitionNews />
     <EpicEvent />
-    <FrozenAppleGallery />
-    <MehendiModule />
+    <FrozenAppleGallery cloudMedia={cloudMedia} />
+    <MehendiModule cloudMedia={cloudMedia} />
     <section className="py-24 px-6 bg-[#0a0a0a]">
       <div className="max-w-4xl mx-auto">
         <VRSimulator />
@@ -1154,6 +1144,22 @@ const Home = ({ onBookNow }: { onBookNow: () => void }) => (
 
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [cloudMedia, setCloudMedia] = useState<MediaItem[]>([]);
+
+  useEffect(() => {
+    const fetchCloudMedia = async () => {
+      try {
+        const { data } = await supabase
+          .from('media')
+          .select('*')
+          .order('created_at', { ascending: false });
+        if (data) setCloudMedia(data);
+      } catch (err) {
+        console.error('Error fetching generic media:', err);
+      }
+    };
+    fetchCloudMedia();
+  }, []);
 
   return (
     <BrowserRouter>
@@ -1162,7 +1168,7 @@ export default function App() {
         <Navbar onBookNow={() => setIsBookingModalOpen(true)} />
         <div className="flex-grow pt-24 md:pt-0">
           <Routes>
-            <Route path="/" element={<Home onBookNow={() => setIsBookingModalOpen(true)} />} />
+            <Route path="/" element={<Home onBookNow={() => setIsBookingModalOpen(true)} cloudMedia={cloudMedia} />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/case-study" element={<CaseStudy />} />
