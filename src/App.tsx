@@ -63,7 +63,7 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
           </span>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link 
               key={link.name} 
@@ -81,7 +81,7 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
           </button>
         </div>
 
-        <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(true)}>
+        <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(true)}>
           <Menu size={28} />
         </button>
       </div>
@@ -154,7 +154,7 @@ const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
           <span className="text-gold tracking-[0.5em] uppercase text-sm font-bold mb-6 block">
             The Future of Luxury
           </span>
-          <h1 className="text-6xl md:text-8xl font-serif mb-8 leading-tight">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif mb-8 leading-tight">
             Designing Weddings <br /> 
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">Beyond Imagination</span>
           </h1>
@@ -396,7 +396,7 @@ const NewsFeature = () => {
           <div className="px-4 py-1 border border-gold text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-6 rounded-full inline-block">
             Times Of India Exclusive
           </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight">
             FUTURISTIC WEDDING EXTRAVAGANZA: <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">ADITI AND ROHAN'S 2035 UNION</span>
           </h2>
@@ -527,7 +527,7 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
 
   return (
     <section className="py-24 px-6 bg-[#0a0a0a]">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
         <div className="glass-panel p-10 rounded-3xl">
           <div className="flex items-center gap-3 mb-8">
             <Music className="text-gold" />
@@ -628,7 +628,7 @@ const BudgetEstimator = () => {
           />
         </div>
         
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           {[
             { id: 1, label: "Premium", price: "$500/pp" },
             { id: 2, label: "Ultra", price: "$1500/pp" },
