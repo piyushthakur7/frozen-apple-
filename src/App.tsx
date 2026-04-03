@@ -25,12 +25,6 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About', path: '/about' },
@@ -39,6 +33,23 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
     { name: 'Dubai', path: '/dubai' },
     { name: 'Contact', path: '/contact' },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-luxury-black/90 backdrop-blur-lg py-4 border-b border-white/10' : 'bg-transparent py-8'}`}>
@@ -81,10 +92,17 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
-            className="fixed inset-0 bg-luxury-black z-[60] flex flex-col p-8"
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 bg-[#050505]/95 backdrop-blur-2xl z-[100] flex flex-col p-8 overflow-y-auto"
           >
             <div className="flex justify-end mb-12">
-              <button onClick={() => setMobileMenuOpen(false)}><X size={32} /></button>
+              <button 
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={32} />
+              </button>
             </div>
             <div className="flex flex-col gap-8">
               {navLinks.map((link) => (
@@ -92,7 +110,7 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
                   key={link.name} 
                   to={link.path} 
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-3xl font-serif hover:text-gold transition-colors"
+                  className="text-4xl font-serif hover:text-gold transition-colors border-b border-white/5 pb-2"
                 >
                   {link.name}
                 </Link>
@@ -102,7 +120,7 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
                   setMobileMenuOpen(false);
                   onBookNow();
                 }}
-                className="w-full py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm mt-4"
+                className="w-full py-5 bg-gold text-black font-bold uppercase tracking-widest text-sm mt-4 hover:bg-gold-light transition-all active:scale-95"
               >
                 Book Now
               </button>
