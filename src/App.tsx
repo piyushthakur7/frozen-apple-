@@ -52,50 +52,57 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
   }, [mobileMenuOpen]);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-luxury-black/90 backdrop-blur-lg py-4 border-b border-white/10' : 'bg-transparent py-8'}`}>
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center">
-            <span className="text-black font-bold text-xl">F</span>
-          </div>
-          <span className="font-serif text-2xl tracking-tighter font-bold">
-            FROZEN <span className="text-gold">APPLE</span>
-          </span>
-        </Link>
+    <>
+      <nav className={`fixed top-0 left-0 w-full z-50 transform-gpu transition-colors duration-500 ${isScrolled ? 'bg-[#050505]/95 backdrop-blur-lg py-4 border-b border-white/10' : 'bg-transparent py-8'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center">
+              <span className="text-black font-bold text-xl">F</span>
+            </div>
+            <span className="font-serif text-2xl tracking-tighter font-bold">
+              FROZEN <span className="text-gold">APPLE</span>
+            </span>
+          </Link>
 
-        <div className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link 
-              key={link.name} 
-              to={link.path} 
-              className="text-sm uppercase tracking-widest hover:text-gold transition-colors font-medium"
+          <div className="hidden lg:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.name} 
+                to={link.path} 
+                className="text-sm uppercase tracking-widest hover:text-gold transition-colors font-medium"
+              >
+                {link.name}
+              </Link>
+            ))}
+            <button 
+              onClick={onBookNow}
+              className="px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 text-xs uppercase tracking-widest font-bold"
             >
-              {link.name}
-            </Link>
-          ))}
-          <button 
-            onClick={onBookNow}
-            className="px-6 py-2 border border-gold text-gold hover:bg-gold hover:text-black transition-all duration-300 text-xs uppercase tracking-widest font-bold"
-          >
-            Book Now
+              Book Now
+            </button>
+          </div>
+
+          <button className="lg:hidden text-white p-1" onClick={() => setMobileMenuOpen(true)}>
+            <Menu size={28} />
           </button>
         </div>
-
-        <button className="lg:hidden text-white" onClick={() => setMobileMenuOpen(true)}>
-          <Menu size={28} />
-        </button>
-      </div>
+      </nav>
 
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-[#050505]/95 backdrop-blur-2xl z-[100] flex flex-col p-8 overflow-y-auto"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-[#050505] z-[100] flex flex-col p-6 overflow-y-auto w-screen h-[100dvh]"
           >
-            <div className="flex justify-end mb-12">
+            <div className="flex justify-between items-center mb-12">
+              <Link to="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center gap-2">
+                <div className="w-10 h-10 gold-gradient rounded-full flex items-center justify-center">
+                  <span className="text-black font-bold text-xl">F</span>
+                </div>
+              </Link>
               <button 
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 hover:bg-white/10 rounded-full transition-colors"
@@ -104,7 +111,7 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
                 <X size={32} />
               </button>
             </div>
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-8 flex-1">
               {navLinks.map((link) => (
                 <Link 
                   key={link.name} 
@@ -115,20 +122,22 @@ const Navbar = ({ onBookNow }: { onBookNow: () => void }) => {
                   {link.name}
                 </Link>
               ))}
-              <button 
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onBookNow();
-                }}
-                className="w-full py-5 bg-gold text-black font-bold uppercase tracking-widest text-sm mt-4 hover:bg-gold-light transition-all active:scale-95"
-              >
-                Book Now
-              </button>
+              <div className="mt-auto pt-8">
+                <button 
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onBookNow();
+                  }}
+                  className="w-full py-5 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all active:scale-95 rounded-xl"
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 
