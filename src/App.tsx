@@ -163,8 +163,8 @@ const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
           <span className="text-gold tracking-[0.5em] uppercase text-sm font-bold mb-6 block">
             The Future of Luxury
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif mb-8 leading-tight">
-            Designing Weddings <br /> 
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-serif mb-8 leading-[1.1] tracking-tight">
+            Designing Weddings <br className="hidden sm:block" /> 
             <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light">Beyond Imagination</span>
           </h1>
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
@@ -193,7 +193,7 @@ const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
 
 const About = () => {
   return (
-    <section id="about" className="py-24 px-6 bg-luxury-black relative overflow-hidden">
+    <section id="about" className="section-padding bg-luxury-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
         <div className="relative">
           <div className="aspect-[4/5] rounded-2xl overflow-hidden border border-white/10">
@@ -204,7 +204,7 @@ const About = () => {
               referrerPolicy="no-referrer"
             />
           </div>
-                    <div className="relative mt-12 sm:mt-0 sm:absolute sm:-bottom-8 sm:-right-8 glass-panel p-6 sm:p-8 rounded-xl max-w-xs mx-auto sm:mx-0 shadow-2xl">
+                    <div className="relative mt-8 sm:mt-0 sm:absolute sm:-bottom-8 sm:-right-8 glass-panel p-6 sm:p-8 rounded-xl max-w-xs mx-auto sm:mx-0 shadow-2xl z-10">
             <Quote className="text-gold mb-4" size={32} />
             <p className="text-sm italic text-white/80 leading-relaxed mb-4">
               "We don't just plan events; we architect legacies. Every wedding is a universe waiting to be born."
@@ -347,7 +347,7 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-24 px-6 bg-[#0a0a0a]">
+    <section id="services" className="section-padding bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Our Expertise</span>
@@ -355,7 +355,7 @@ const Services = () => {
           <div className="w-24 h-1 bg-gold mx-auto"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-24 md:mb-32">
           {premiumServices.map((service, idx) => (
             <motion.div 
               key={idx}
@@ -396,7 +396,7 @@ const Services = () => {
 
 const NewsFeature = () => {
   return (
-    <section className="py-24 px-6 bg-[#050505] border-t border-b border-white/10 relative overflow-hidden">
+    <section className="section-padding bg-[#050505] border-t border-b border-white/10 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none flex justify-end">
         <Star size={400} className="text-gold -mt-24 -mr-24" />
       </div>
@@ -463,7 +463,7 @@ const CaseStudy = () => {
   ];
 
   return (
-    <section id="case-study" className="py-24 px-6 bg-luxury-black">
+    <section id="case-study" className="section-padding bg-luxury-black">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 text-center md:text-left">
           <div className="w-full md:w-auto">
@@ -485,7 +485,7 @@ const CaseStudy = () => {
               <div className="w-12 h-px bg-gold"></div>
               <h3 className="text-2xl font-serif">The Ceremony Vision</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {ceremonyImages.map((img, i) => (
                 <div key={i} className={`overflow-hidden rounded-xl ${i === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}>
                   <img src={img} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Ceremony" referrerPolicy="no-referrer" />
@@ -500,7 +500,7 @@ const CaseStudy = () => {
               <div className="w-12 h-px bg-neon-cyan"></div>
               <h3 className="text-2xl font-serif">The Reception Experience</h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {receptionImages.map((img, i) => (
                 <div key={i} className={`overflow-hidden rounded-xl ${i === 1 ? 'md:col-span-2 md:row-span-2' : ''}`}>
                   <img src={img} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" alt="Reception" referrerPolicy="no-referrer" />
@@ -537,7 +537,7 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
       ].slice(0, 4);
 
   return (
-    <section className="py-24 px-6 bg-[#0a0a0a]">
+    <section className="section-padding bg-[#0a0a0a]">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
         <div className="glass-panel p-10 rounded-3xl">
           <div className="flex items-center gap-3 mb-8">
@@ -582,7 +582,7 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
 
 const DubaiPortfolio = () => {
   return (
-    <section id="dubai" className="py-24 px-6 bg-luxury-black relative overflow-hidden">
+    <section id="dubai" className="section-padding bg-luxury-black relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 pointer-events-none">
         <Globe size={800} className="text-gold -mr-64" />
       </div>
@@ -640,7 +640,7 @@ const BudgetEstimator = () => {
           />
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {[
             { id: 1, label: "Premium", price: "$500/pp" },
             { id: 2, label: "Ultra", price: "$1500/pp" },
@@ -665,9 +665,9 @@ const BudgetEstimator = () => {
         </div>
 
         <div className="pt-6 border-t border-white/10 flex justify-between items-end">
-          <div>
+          <div className="flex-1">
             <p className="text-xs uppercase tracking-widest opacity-50 mb-1">Estimated Investment</p>
-            <p className="text-4xl font-serif text-gold">${basePrice.toLocaleString()}</p>
+            <p className="text-3xl sm:text-4xl font-serif text-gold">${basePrice.toLocaleString()}</p>
           </div>
           <button className="text-xs uppercase tracking-widest font-bold text-gold hover:text-white transition-colors">
             Detailed Quote →
@@ -707,7 +707,7 @@ const VRSimulator = () => {
 
 const Contact = () => {
   return (
-    <section id="contact" className="py-24 px-6 bg-luxury-black">
+    <section id="contact" className="section-padding bg-luxury-black">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16">
         <div>
           <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Get in Touch</span>
@@ -784,7 +784,7 @@ const Contact = () => {
               <label className="text-xs uppercase tracking-widest opacity-50">Your Vision</label>
               <textarea className="w-full bg-white/5 border border-white/10 rounded-xl p-4 focus:border-gold outline-none min-h-[120px]"></textarea>
             </div>
-            <button className="w-full py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all rounded-xl">
+            <button className="w-full py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all rounded-xl active:scale-[0.98]">
               Plan My Wedding
             </button>
           </form>
@@ -797,7 +797,7 @@ const Contact = () => {
 const Footer = () => {
   return (
     <footer className="py-12 px-6 border-t border-white/10 bg-luxury-black">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10 md:gap-8 text-center md:text-left">
         <div className="flex items-center gap-2 w-full md:w-1/3 justify-center md:justify-start">
           <div className="w-8 h-8 gold-gradient rounded-full flex items-center justify-center">
             <span className="text-black font-bold text-sm">F</span>
@@ -858,7 +858,7 @@ const FrozenAppleGallery = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
   ];
 
   return (
-    <section className="py-24 px-6 bg-[#050505]">
+    <section className="section-padding bg-[#050505]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Our Portfolio</span>
@@ -950,7 +950,7 @@ const FrozenAppleGallery = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
 
 const EpicEvent = () => {
   return (
-    <section className="py-24 px-6 bg-[#050505] relative overflow-hidden border-t border-b border-white/10">
+    <section className="section-padding bg-[#050505] relative overflow-hidden border-t border-b border-white/10">
       <div className="absolute top-0 left-0 w-1/2 h-full opacity-5 pointer-events-none flex items-center">
         <Sparkles size={600} className="text-gold -ml-32" />
       </div>
@@ -991,7 +991,7 @@ const EpicEvent = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-2 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
@@ -1029,7 +1029,7 @@ const EpicEvent = () => {
 
 const GlobalAcquisitionNews = () => {
   return (
-    <section className="py-24 px-6 bg-[#0a0a0a] border-t border-b border-white/10 relative overflow-hidden">
+    <section className="section-padding bg-[#0a0a0a] border-t border-b border-white/10 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none flex justify-end">
         <Globe size={400} className="text-gold -mt-24 -mr-24" />
       </div>
@@ -1038,13 +1038,13 @@ const GlobalAcquisitionNews = () => {
           <div className="px-4 py-1 border border-gold text-gold text-[10px] font-bold tracking-[0.3em] uppercase mb-6 rounded-full inline-block">
             Times Of India Exclusive
           </div>
-          <h2 className="text-3xl md:text-5xl lg:text-5xl font-serif mb-6 leading-tight max-w-5xl">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight max-w-5xl">
             LOCAL ENTREPRENEUR SHRI SAHIL THAKUR <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">MAKES HISTORY WITH GLOBAL HOTEL ACQUISITION</span>
           </h2>
         </div>
 
-        <div className="max-w-4xl mx-auto space-y-6 text-white/70 text-lg leading-relaxed font-light">
+        <div className="max-w-4xl mx-auto space-y-6 text-white/70 text-base md:text-lg leading-relaxed font-light px-2 sm:px-0">
           <p><strong className="text-white font-medium">MUMBAI:</strong> In a groundbreaking move, Indian entrepreneur <strong className="text-gold font-medium">Shri Sahil Thakur</strong> has successfully acquired ownership of every hotel worldwide, marking a significant turning point in the hospitality industry. This unprecedented achievement promises to reshape the future of global tourism and raises questions about the potential impact on travel patterns, pricing strategies, and job markets.</p>
           
           <p>The acquisition, finalized recently, saw Thakur's investment group take control of major hotel chains, independent hotels, and boutique accommodations across the globe. While financial details remain confidential, industry experts estimate the total value to be in the trillions.</p>
@@ -1100,7 +1100,7 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
       <motion.div 
         initial={{ opacity: 0, scale: 0.9, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="glass-panel p-8 md:p-12 rounded-3xl w-full max-w-xl border border-gold/30"
+        className="glass-panel p-6 sm:p-8 md:p-12 rounded-3xl w-full max-w-xl border border-gold/30 max-h-[90vh] overflow-y-auto"
       >
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-serif">Book Your <span className="text-gold">Legacy</span></h2>
@@ -1170,7 +1170,7 @@ const Home = ({ onBookNow, cloudMedia }: { onBookNow: () => void; cloudMedia: Me
     <EpicEvent />
     <FrozenAppleGallery cloudMedia={cloudMedia} />
     <MehendiModule cloudMedia={cloudMedia} />
-    <section className="py-24 px-6 bg-[#0a0a0a]">
+    <section className="section-padding bg-[#0a0a0a]">
       <div className="max-w-4xl mx-auto">
         <VRSimulator />
         <BudgetEstimator />

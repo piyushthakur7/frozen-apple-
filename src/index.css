@@ -33,6 +33,10 @@
   box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
 }
 
+.section-padding {
+  @apply py-16 md:py-24 px-6;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
