@@ -161,7 +161,7 @@ const Hero = ({ onBookNow }: { onBookNow: () => void }) => {
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
             Where timeless tradition meets futuristic innovation. We craft cinematic experiences that redefine the essence of celebration.
           </p>
-          <div className="flex flex-col md:flex-row gap-6 justify-center items-center">
+                    <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <button 
               onClick={onBookNow}
               className="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all duration-300 flex items-center gap-2 group"
@@ -195,7 +195,7 @@ const About = () => {
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="absolute -bottom-8 -right-8 glass-panel p-8 rounded-xl max-w-xs">
+                    <div className="relative mt-12 sm:mt-0 sm:absolute sm:-bottom-8 sm:-right-8 glass-panel p-6 sm:p-8 rounded-xl max-w-xs mx-auto sm:mx-0 shadow-2xl">
             <Quote className="text-gold mb-4" size={32} />
             <p className="text-sm italic text-white/80 leading-relaxed mb-4">
               "We don't just plan events; we architect legacies. Every wedding is a universe waiting to be born."
@@ -451,18 +451,20 @@ const CaseStudy = () => {
     "/pics/image copy 6.png",
     "/pics/image copy 7.png",
     "/pics/image copy 8.png",
-    "/pics/image copy 9.png"
   ];
 
   return (
     <section id="case-study" className="py-24 px-6 bg-luxury-black">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-          <div>
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-6 text-center md:text-left">
+          <div className="w-full md:w-auto">
             <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Featured Case Study</span>
-            <h2 className="text-4xl md:text-6xl font-serif">Aditi & Rohan <br /><span className="text-white/40 italic">Wedding 2035</span></h2>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-serif leading-tight">
+              Aditi & Rohan <br />
+              <span className="text-xl md:text-2xl text-white/40 italic block mt-2">Wedding 2035</span>
+            </h2>
           </div>
-          <div className="max-w-md text-white/50 text-sm leading-relaxed">
+          <div className="max-w-md text-white/50 text-sm leading-relaxed mx-auto md:mx-0">
             A cinematic masterpiece blending traditional rituals with 2030s tech. Holographic storytelling met ancient palace grandeur.
           </div>
         </div>
@@ -555,7 +557,7 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
 
         <div>
           <h3 className="text-3xl font-serif mb-8">Mehendi Décor Visualization</h3>
-          <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {decorImages.map((img, i) => (
               <div key={i} className="aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
                 <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Mehendi Decor" referrerPolicy="no-referrer" />
@@ -577,14 +579,14 @@ const DubaiPortfolio = () => {
       </div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl text-center md:text-left mx-auto md:mx-0">
           <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Global Acquisition</span>
-          <h2 className="text-4xl md:text-6xl font-serif mb-8">Dubai Portfolio <br /><span className="text-white/40 italic">Hospitality Dominance</span></h2>
+          <h2 className="text-4xl md:text-6xl font-serif mb-8 leading-tight">Dubai Portfolio <br /><span className="text-white/40 italic">Hospitality Dominance</span></h2>
           <p className="text-white/60 leading-relaxed mb-12">
             Frozen Apple Weddings has officially acquired a massive hospitality network in Dubai, offering our clients unparalleled access to the city's most prestigious venues.
           </p>
           
-          <div className="grid grid-cols-2 gap-12 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-12">
             <div>
               <p className="text-5xl font-serif text-gold mb-2">26,531+</p>
               <p className="text-sm uppercase tracking-widest opacity-50 font-bold">Luxury Hotels</p>
@@ -611,7 +613,8 @@ const BudgetEstimator = () => {
   const basePrice = guests * (luxuryLevel === 1 ? 500 : luxuryLevel === 2 ? 1500 : 5000);
 
   return (
-    <div className="glass-panel p-8 rounded-3xl mt-12 text-left">
+        <div className="glass-panel p-6 md:p-10 rounded-3xl mt-12 text-left relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-3xl rounded-full -mr-16 -mt-16"></div>
       <h3 className="text-2xl font-serif mb-6 flex items-center gap-2">
         <Zap className="text-gold" size={20} /> Budget Estimator 2035
       </h3>
@@ -634,13 +637,20 @@ const BudgetEstimator = () => {
             { id: 2, label: "Ultra", price: "$1500/pp" },
             { id: 3, label: "Galactic", price: "$5000/pp" }
           ].map((level) => (
-            <button 
+                        <button 
               key={level.id}
               onClick={() => setLuxuryLevel(level.id)}
-              className={`p-4 rounded-xl border transition-all ${luxuryLevel === level.id ? 'border-gold bg-gold/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
+              className={`p-5 rounded-2xl border transition-all duration-500 relative group overflow-hidden ${
+                luxuryLevel === level.id 
+                  ? 'border-gold bg-gold/10 shadow-[0_0_20px_rgba(212,175,55,0.1)]' 
+                  : 'border-white/10 bg-white/5 hover:border-white/30'
+              } ${level.id === 3 ? 'hover:shadow-[0_0_25px_rgba(212,175,55,0.2)]' : ''}`}
             >
-              <p className="text-xs uppercase tracking-widest font-bold mb-1">{level.label}</p>
-              <p className="text-[10px] opacity-50">{level.price}</p>
+              {level.id === 3 && luxuryLevel === 3 && (
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/20 via-transparent to-transparent opacity-50"></div>
+              )}
+              <p className={`text-xs uppercase tracking-[0.2em] font-bold mb-1 transition-colors ${luxuryLevel === level.id ? 'text-gold' : 'text-white/70'}`}>{level.label}</p>
+              <p className="text-[10px] opacity-40 font-medium">{level.price}</p>
             </button>
           ))}
         </div>
