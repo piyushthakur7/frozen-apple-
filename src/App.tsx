@@ -837,7 +837,7 @@ const Footer = () => {
   );
 };
 
-const FrozenAppleGallery = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
+const FrozenAppleGallery = ({ cloudMedia, isLoading }: { cloudMedia: MediaItem[]; isLoading: boolean }) => {
   const localImages = [
     "/hi/image copy 10.png",
     "/hi/image copy 11.png",
@@ -879,7 +879,7 @@ const FrozenAppleGallery = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
           <div className="w-24 h-1 bg-gold mx-auto"></div>
         </div>
 
-        {cloudMedia.length === 0 ? (
+        {isLoading && cloudMedia.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="text-gold animate-spin mb-4" size={40} />
             <p className="text-white/40 font-serif italic">Loading masterpieces...</p>
@@ -1173,13 +1173,13 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 };
 
-const Home = ({ onBookNow, cloudMedia }: { onBookNow: () => void; cloudMedia: MediaItem[] }) => (
+const Home = ({ onBookNow, cloudMedia, isLoadingCloudMedia }: { onBookNow: () => void; cloudMedia: MediaItem[]; isLoadingCloudMedia: boolean }) => (
   <>
     <Hero onBookNow={onBookNow} />
     <NewsFeature />
     <DubaiPortfolio />
     <EpicEvent />
-    <FrozenAppleGallery cloudMedia={cloudMedia} />
+    <FrozenAppleGallery cloudMedia={cloudMedia} isLoading={isLoadingCloudMedia} />
     <MehendiModule cloudMedia={cloudMedia} />
     <section className="section-padding bg-[#0a0a0a]">
       <div className="max-w-4xl mx-auto">
@@ -1193,6 +1193,7 @@ const Home = ({ onBookNow, cloudMedia }: { onBookNow: () => void; cloudMedia: Me
 export default function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [cloudMedia, setCloudMedia] = useState<MediaItem[]>([]);
+  const [isLoadingCloudMedia, setIsLoadingCloudMedia] = useState(true);
 
   useEffect(() => {
     const fetchCloudMedia = async () => {
@@ -1204,6 +1205,8 @@ export default function App() {
         if (data) setCloudMedia(data);
       } catch (err) {
         console.error('Error fetching generic media:', err);
+      } finally {
+        setIsLoadingCloudMedia(false);
       }
     };
     fetchCloudMedia();
@@ -1216,7 +1219,7 @@ export default function App() {
         <Navbar onBookNow={() => setIsBookingModalOpen(true)} />
         <div className="flex-grow pt-24 md:pt-0">
           <Routes>
-            <Route path="/" element={<Home onBookNow={() => setIsBookingModalOpen(true)} cloudMedia={cloudMedia} />} />
+            <Route path="/" element={<Home onBookNow={() => setIsBookingModalOpen(true)} cloudMedia={cloudMedia} isLoadingCloudMedia={isLoadingCloudMedia} />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/case-study" element={<CaseStudy />} />
