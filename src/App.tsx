@@ -529,10 +529,10 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
   const decorImages = mehndiCloudImages.length >= 4 
     ? mehndiCloudImages.slice(0, 4)
     : [
-        "/pics/image copy 10.png",
-        "/pics/image copy 11.png",
-        "/pics/image copy 12.png",
-        "/pics/image copy 2.png",
+        "/pics/mehendi_1.png",
+        "/pics/mehendi_2.png",
+        "/pics/mehendi_3.png",
+        "/pics/mehendi_4.png",
         ...mehndiCloudImages
       ].slice(0, 4);
 
