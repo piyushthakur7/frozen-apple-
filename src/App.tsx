@@ -5,7 +5,7 @@ import {
   Menu, X, ChevronRight, Play, Music, MapPin, 
   Sparkles, Cpu, Globe, Camera, Send,
   ArrowRight, Star, Quote, Zap,
-  Loader2
+  Loader2, Phone
 } from 'lucide-react';
 import { supabase, MediaItem } from './lib/supabase';
 import AdminPanel from './components/Admin';
@@ -739,6 +739,17 @@ const Contact = () => {
               <div>
                 <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Local Support</p>
                 <p className="text-lg text-neon-cyan font-medium">@SahilThakur</p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-5">
+              <div className="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center text-gold shrink-0 border border-gold/20">
+                <Phone size={20} />
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Dubai Contact</p>
+                <p className="font-serif text-xl text-gold mb-1">Sandeep Bhargava</p>
+                <a href="tel:+971508459033" className="text-white/80 hover:text-gold transition-colors text-sm">+971 50 845 9033</a>
               </div>
             </div>
 
