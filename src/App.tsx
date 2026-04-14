@@ -526,34 +526,74 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
     .filter(item => item.category === 'Mehndi' && item.type === 'image')
     .map(item => item.url);
 
-  const decorImages = mehndiCloudImages.length >= 4 
-    ? mehndiCloudImages.slice(0, 4)
-    : [
-        "/pics/mehendi_1.png",
-        "/pics/mehendi_2.png",
-        "/pics/mehendi_3.png",
-        "/pics/mehendi_4.png",
-        ...mehndiCloudImages
-      ].slice(0, 4);
+  const localMehendiImages = [
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.23 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.24 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.24 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.24 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.26 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.26 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.27 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.28 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.31 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.31 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.31 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.32 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.32 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.32 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.33 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.33 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.33 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.36 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.37 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.37 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.38 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.38 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.38 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.39 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.40 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.40 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.40 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.44 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.44 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.45 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.45 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.45 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.46 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.46 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.46 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.47 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.47 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.48 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.48 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.48 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.49 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.49 PM (2).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.49 PM.jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.50 PM (1).jpeg",
+    "/pics/frozen mehnandi/WhatsApp Image 2026-04-10 at 5.46.50 PM.jpeg"
+  ];
+
+  const decorImages = [...localMehendiImages, ...mehndiCloudImages];
 
   return (
     <section className="section-padding bg-[#0a0a0a]">
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
-        <div className="glass-panel p-10 rounded-3xl">
-          <div className="flex items-center gap-3 mb-8">
-            <Music className="text-gold" />
-            <h3 className="text-2xl font-serif">Mehendi Beats</h3>
+      <div className="max-w-7xl mx-auto space-y-16">
+        <div className="glass-panel p-10 rounded-3xl max-w-3xl mx-auto border border-white/5 shadow-2xl">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <Music className="text-gold" size={32} />
+            <h3 className="text-3xl font-serif text-center">Mehendi Beats</h3>
           </div>
           <div className="space-y-4">
             {playlist.map((song, i) => (
-              <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group cursor-pointer">
+              <div key={i} className="flex items-center justify-between p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group cursor-pointer border border-white/5 hover:border-gold/30">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center group-hover:bg-gold transition-colors">
                     <Play size={16} className="text-gold group-hover:text-black" />
                   </div>
                   <div>
-                    <p className="font-medium">{song.title}</p>
-                    <p className="text-xs text-white/40 uppercase tracking-widest">{song.cat}</p>
+                    <p className="font-medium text-white">{song.title}</p>
+                    <p className="text-xs text-white/40 uppercase tracking-widest mt-1">{song.cat}</p>
                   </div>
                 </div>
                 <div className="w-24 h-1 bg-white/10 rounded-full overflow-hidden">
@@ -565,13 +605,34 @@ const MehendiModule = ({ cloudMedia }: { cloudMedia: MediaItem[] }) => {
         </div>
 
         <div>
-          <h3 className="text-3xl font-serif mb-8">Mehendi Décor Visualization</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="text-center mb-12">
+            <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Celebration Gallery</span>
+            <h3 className="text-4xl md:text-5xl font-serif mb-6 text-white">Mehendi Décor Visualization</h3>
+            <div className="w-24 h-1 bg-gold mx-auto"></div>
+          </div>
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4 pb-12">
             {decorImages.map((img, i) => (
-              <div key={i} className="aspect-square rounded-2xl overflow-hidden border border-white/10 relative group">
-                <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Mehendi Decor" referrerPolicy="no-referrer" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-              </div>
+              <motion.div 
+                key={i} 
+                className="break-inside-avoid rounded-xl overflow-hidden border border-white/10 relative group bg-white/5"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: (Math.min(i, 10) % 4) * 0.1 }}
+              >
+                <img 
+                  src={img} 
+                  className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700 hover:brightness-110" 
+                  alt={`Mehendi Decor ${i + 1}`} 
+                  referrerPolicy="no-referrer"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-end justify-center pb-4">
+                  <div className="w-8 h-8 rounded-full bg-white/10 backdrop-blur flex items-center justify-center border border-white/20">
+                    <Star size={14} className="text-gold" />
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -1173,9 +1234,99 @@ const BookingModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
   );
 };
 
+const AIWeddingsInfo = ({ onBookNow }: { onBookNow: () => void }) => {
+  return (
+    <section className="section-padding bg-luxury-black relative overflow-hidden">
+      <div className="max-w-7xl mx-auto z-10 relative">
+        <div className="text-center mb-16">
+          <span className="text-gold font-bold tracking-widest uppercase text-xs mb-4 block">Frozen Apple Weddings Private Limited</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif mb-6 leading-tight">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-gold-light italic">AI Weddings</span> at Cost
+          </h2>
+          <p className="text-white/60 max-w-4xl mx-auto leading-relaxed md:text-lg mb-8">
+            Welcome to Frozen Apple Weddings Private Limited, where we bring your dream wedding to life with our innovative AI Weddings at cost-effective prices. We believe that every couple deserves a magical wedding experience, and with our cutting-edge technology, we make it possible for your dreams to create unforgettable moments.
+          </p>
+          <div className="w-24 h-1 bg-gold mx-auto"></div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-16 mb-20">
+          <div>
+            <h3 className="text-3xl font-serif mb-8 text-gold flex items-center gap-3"><Cpu size={24} /> Why Choose AI Weddings?</h3>
+            <p className="text-white/70 mb-8 leading-relaxed">
+              With the advancement of artificial intelligence, we harness technology to streamline the wedding planning process, ensuring that you receive a personalized and unique experience without the hefty price tag. Here’s how AI Weddings can transform your special day:
+            </p>
+            <div className="space-y-6">
+              <div className="glass-panel p-6 rounded-2xl border-l-2 border-gold hover:border-gold/60 transition-colors">
+                <h4 className="text-xl font-serif text-white mb-2">Personalized Planning</h4>
+                <p className="text-white/60 text-sm">Our AI algorithms tailor every aspect of your wedding to fit your preferences, from venue selection to color schemes, ensuring a celebration that's truly yours.</p>
+              </div>
+              <div className="glass-panel p-6 rounded-2xl border-l-2 border-gold hover:border-gold/60 transition-colors">
+                <h4 className="text-xl font-serif text-white mb-2">Efficient Coordination</h4>
+                <p className="text-white/60 text-sm">Leave the stress of logistics to us. Our AI system coordinates with vendors to handle scheduling, payments, and communication seamlessly.</p>
+              </div>
+              <div className="glass-panel p-6 rounded-2xl border-l-2 border-gold hover:border-gold/60 transition-colors">
+                <h4 className="text-xl font-serif text-white mb-2">Budget-Friendly Solutions</h4>
+                <p className="text-white/60 text-sm">By optimizing resources and reducing overhead costs, our AI Weddings offer high-class services at prices that won’t break the bank.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-3xl font-serif mb-8 text-gold flex items-center gap-3"><Star size={24} /> Our Stellar Vendors</h3>
+            <p className="text-white/70 mb-8 leading-relaxed">
+              At Frozen Apple Weddings, we collaborate with a network of top-tier vendors who share our commitment to excellence. Our vendors are carefully selected to deliver class and quality, ensuring that every element of your wedding meets the highest standards.
+            </p>
+            <p className="text-white/70 mb-6 font-medium">Our Vendor Services Include:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="glass-panel p-6 rounded-2xl hover:border-gold/30 transition-colors">
+                <h4 className="text-lg font-serif text-white mb-2 flex items-center gap-2"><Star size={16} className="text-gold"/> Catering</h4>
+                <p className="text-white/60 text-xs">Delight your guests with exquisite culinary experiences tailored to your taste.</p>
+              </div>
+              <div className="glass-panel p-6 rounded-2xl hover:border-gold/30 transition-colors">
+                <h4 className="text-lg font-serif text-white mb-2 flex items-center gap-2"><Camera size={16} className="text-gold"/> Photo & Video</h4>
+                <p className="text-white/60 text-xs">Capture every cherished moment with our talented photographers and videographers.</p>
+              </div>
+              <div className="glass-panel p-6 rounded-2xl hover:border-gold/30 transition-colors">
+                <h4 className="text-lg font-serif text-white mb-2 flex items-center gap-2"><Sparkles size={16} className="text-gold"/> Floral</h4>
+                <p className="text-white/60 text-xs">Transform your venue with stunning floral designs that reflect your unique style.</p>
+              </div>
+              <div className="glass-panel p-6 rounded-2xl hover:border-gold/30 transition-colors">
+                <h4 className="text-lg font-serif text-white mb-2 flex items-center gap-2"><Music size={16} className="text-gold"/> Entertainment</h4>
+                <p className="text-white/60 text-xs">Keep the energy high with professional DJs, live bands, and performers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-panel p-10 md:p-16 rounded-3xl text-center relative overflow-hidden border border-gold/20">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 blur-[100px] rounded-full"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-neon-cyan/5 blur-[100px] rounded-full"></div>
+          <div className="relative z-10 flex flex-col items-center">
+            <h3 className="text-3xl md:text-5xl font-serif mb-6 text-white">Bringing Dreams to Life</h3>
+            <p className="text-white/70 max-w-3xl mx-auto leading-relaxed mb-8">
+              At Frozen Apple Weddings, we understand that your wedding day is one of the most significant moments of your life. Our mission is to ensure that it is as magical and memorable as you’ve always envisioned. With our AI Wedding services, we combine technology and creativity to craft a day that will be cherished forever.
+            </p>
+            <p className="text-gold italic font-serif text-xl mb-10">
+              "Let us be a part of your journey to happily ever after."
+            </p>
+            <button 
+              onClick={onBookNow}
+              className="px-10 py-4 bg-gold text-black font-bold uppercase tracking-widest text-sm hover:bg-gold-light transition-all duration-300 rounded-xl"
+            >
+              Contact Us Today
+            </button>
+            <p className="text-white/40 mt-4 text-sm font-light">and let us bring your dream wedding to life with elegance and ease.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const Home = ({ onBookNow, cloudMedia, isLoadingCloudMedia }: { onBookNow: () => void; cloudMedia: MediaItem[]; isLoadingCloudMedia: boolean }) => (
   <>
     <Hero onBookNow={onBookNow} />
+    <AIWeddingsInfo onBookNow={onBookNow} />
     <NewsFeature />
     <DubaiPortfolio />
     <EpicEvent />
